@@ -1,11 +1,12 @@
 import { model, Schema } from "mongoose";
+import { Iresources } from "./organizationsModel";
 
 export interface IUser extends Document {
     username: string;
     password: string;
     organization: string;
     area: string | null;
-    resorses: [];
+    resources: Iresources[];
 }
 
 const userSchema = new Schema<IUser>({
@@ -25,7 +26,7 @@ const userSchema = new Schema<IUser>({
     area: {
         type: String,
     },
-    resorses: {
+    resources: {
         type: [],
         required: true
     }

@@ -1,11 +1,11 @@
 import { model, Schema } from "mongoose";
 
-interface Iresources extends Document {
+export interface Iresources extends Document {
     name: string;
     amount: number
 }
 
-interface IOrganization extends Document {
+export interface IOrganization extends Document {
     name: string;
     resources: Iresources[]
     budget: number
