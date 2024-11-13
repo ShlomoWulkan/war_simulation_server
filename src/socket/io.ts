@@ -7,7 +7,7 @@ export const handleSocketConnection = (client: Socket) => {
         console.log("user disconnected");
     })
 
-    client.on("example", () => {
+    client.on("lanch", () => {
         console.log("example event");
         io.emit("client-example event");
     })

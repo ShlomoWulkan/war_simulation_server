@@ -34,3 +34,17 @@ export const createAttack = async (attack: attackDTO) => {
         throw new Error("Could not create attack")
     }
 }
+
+export const updateAttackStatus = async (attack: {attack_id: string, status: string}) => {
+    try {
+        const existAttack = await attackModel.findByIdAndUpdate(attack.attack_id, {
+            $set: {
+                status: attack.status
+            }
+        })
+        return existAttack;
+    } catch (error) {
+        console.log(error);
+        throw error  
+    }
+}
