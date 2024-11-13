@@ -2,6 +2,7 @@ import express  from "express";
 import 'dotenv/config'
 import cors from "cors"
 import authRoute from "./routes/authRoute"
+import attackRoute from "./routes/attackRoute"
 import connectDB from "./config/db";
 import http from "http";
 import { Server } from "socket.io";
@@ -25,6 +26,7 @@ connectDB()
 app.use(express.json())
 app.use(cors())
 app.use("/api/auth", authRoute)
+app.use("/api/attack", attackRoute)
 
 httpServer.listen(port, () => {
     console.log(`Server is up and running on port ${port}`)

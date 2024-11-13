@@ -5,7 +5,7 @@ interface Iattack {
     area: string;
     missile: string;
     date: Date;
-    time: number;
+    speed: number;
     status: string;
 }
 
@@ -21,12 +21,14 @@ const attackSchema = new Schema({
     },
     date: {
         type: Date,
+        default: Date.now
     },
-    time: {
+    speed: {
         type: Number,
     },
     status: {
         type: String,
+        default: "launched",
     }
 });
 
