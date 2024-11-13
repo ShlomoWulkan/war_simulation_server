@@ -14,7 +14,8 @@ export const userLogin = async (user: LoginDTO) => {
    const token = await jwt.sign({
       user_id: existUser._id,
       username: existUser.username,
-      organization: existUser.organization
+      organization: existUser.organization,
+      area: existUser.area
    }, 
    process.env.JWT_SECRET!,
    {
