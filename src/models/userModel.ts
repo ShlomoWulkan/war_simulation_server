@@ -3,9 +3,9 @@ import { model, Schema } from "mongoose";
 export interface IUser extends Document {
     username: string;
     password: string;
-    isAdmin: boolean;
-    referens: Schema.Types.ObjectId;
-
+    organization: string;
+    area: string | null;
+    resorses: [];
 }
 
 const userSchema = new Schema<IUser>({
@@ -18,14 +18,17 @@ const userSchema = new Schema<IUser>({
         type: String,
         required: true
     },
-    isAdmin: {
-        type: Boolean,
-        default: false,
+    organization: {
+        type: String,
+        required: true
     },
-    referens: {
-        type: Schema.Types.ObjectId,
-        ref: "User"
+    area: {
+        type: String,
+    },
+    resorses: {
+        type: [],
+        required: true
     }
 });
 
-export default model<IUser>("User", userSchema);
+export default model<IUser>("users", userSchema);
