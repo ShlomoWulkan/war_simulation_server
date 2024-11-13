@@ -8,7 +8,7 @@ export default (
 ) => {
     try {
         const token = req.headers["authorization"];
-        if (!token){ res.status(401).json({ err: "Unauthorized" });return}
+        if (!token){ res.status(401).json({ err: "Unauthorized" }); return}
         const payload = jwt.verify(token, process.env.JWT_SECRET!);
         (req as any).user = payload
         next()
