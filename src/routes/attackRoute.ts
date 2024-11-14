@@ -3,7 +3,7 @@ import { addAttack, getAllAttacksOfDefense, getAllAttacksOfOrg } from "../contro
 
 const router = Router();
 
-router.post("/org", getAllAttacksOfOrg);
+router.get("/org/:id", getAllAttacksOfOrg);
 
 router.post("/defense", getAllAttacksOfDefense);
 

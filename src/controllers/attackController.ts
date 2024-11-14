@@ -3,7 +3,7 @@ import { createAttack, getAttacksOfOrg, getAttacksOfDefense } from "../services/
 
 export const getAllAttacksOfOrg = async(req: Request, res: Response) => {
     try {
-        const attacks = await getAttacksOfOrg(req.body);
+        const attacks = await getAttacksOfOrg(req.params.id);
         res.status(200).json(attacks)
     } catch (error) {
         res.status(400).json((error as Error).message)

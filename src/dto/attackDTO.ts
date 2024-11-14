@@ -4,4 +4,5 @@ export interface attackDTO {
     missile: string;
     speed: number
     attacker_id: string
+    timeToHit: number
 }

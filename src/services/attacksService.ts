@@ -1,11 +1,11 @@
+import { io } from "../app";
 import { attackDTO } from "../dto/attackDTO";
 import attackModel from "../models/attackModel"
 import missilesModel from "../models/missilesModel";
 
-export const getAttacksOfOrg = async (attacker_id: { attacker_id: string;}) => {
+export const getAttacksOfOrg = async (attacker_id: string) => {
     try {
-        return await attackModel.find({user_id: attacker_id.attacker_id }).lean()
-        
+        return await attackModel.find({attacker_id}).lean()
     } catch (error) {
         console.log(error);
         throw new Error("Could not get attacks of org")
@@ -27,6 +27,7 @@ export const createAttack = async (attack: attackDTO) => {
         const missile = await missilesModel.findOne({name: attack.missile}).lean()
         if(!missile) throw new Error("Missile not found")
         attack.speed = missile.speed
+        attack.timeToHit = missile.speed * 60
         const newAttack = new attackModel(attack)
         return await newAttack.save()
     } catch (error) {
@@ -48,3 +49,18 @@ export const updateAttackStatus = async (attack: {attack_id: string, status: str
         throw error  
     }
 }
+
+setInterval(async () => {
+    const attacks = await attackModel.find({ status: "launched" }); 
+    attacks.forEach(async (attack) => {
+        if (attack.timeToHit! > 0) {
+            attack.timeToHit! -= 1;
+            await attack.save();
+            io.emit("updateAttackTime", { id: attack._id, timeToHit: attack.timeToHit });
+        } else {
+            attack.status = "hit";
+            await attack.save();
+            io.emit("updateAttackStatus", { id: attack._id, status: attack.status });
+        }
+    });
+}, 1000);

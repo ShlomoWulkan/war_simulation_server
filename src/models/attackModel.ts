@@ -8,6 +8,7 @@ interface Iattack {
     speed: number;
     status: string;
     attacker_id: string
+    timeToHit: number
 }
 
 const attackSchema = new Schema({
@@ -33,6 +34,9 @@ const attackSchema = new Schema({
     },
     attacker_id: {
         type: String
+    },
+    timeToHit: {
+        type: Number
     }
 });
 
