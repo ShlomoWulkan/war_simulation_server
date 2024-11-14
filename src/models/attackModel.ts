@@ -7,6 +7,7 @@ interface Iattack {
     date: Date;
     speed: number;
     status: string;
+    attacker_id: string
 }
 
 const attackSchema = new Schema({
@@ -29,6 +30,9 @@ const attackSchema = new Schema({
     status: {
         type: String,
         default: "launched",
+    },
+    attacker_id: {
+        type: String
     }
 });
 

@@ -2,9 +2,9 @@ import { attackDTO } from "../dto/attackDTO";
 import attackModel from "../models/attackModel"
 import missilesModel from "../models/missilesModel";
 
-export const getAttacksOfOrg = async (org: { org: string;}) => {
+export const getAttacksOfOrg = async (attacker_id: { attacker_id: string;}) => {
     try {
-        return await attackModel.find({organization: org.org}).lean()
+        return await attackModel.find({user_id: attacker_id.attacker_id }).lean()
         
     } catch (error) {
         console.log(error);

@@ -3,4 +3,5 @@ export interface attackDTO {
     area?: string;
     missile: string;
     speed: number
+    attacker_id: string
 }
