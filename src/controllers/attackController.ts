@@ -12,7 +12,7 @@ export const getAllAttacksOfOrg = async(req: Request, res: Response) => {
 
 export const getAllAttacksOfDefense = async(req: Request, res: Response) => {
     try {
-        const attacks = await getAttacksOfDefense(req.body);
+        const attacks = await getAttacksOfDefense(req.params.area);
         res.status(200).json(attacks)
     } catch (error) {
         res.status(400).json((error as Error).message)
@@ -27,4 +27,3 @@ export const addAttack = async(req: Request, res: Response) => {
         res.status(400).json((error as Error).message)
     }
 };
-

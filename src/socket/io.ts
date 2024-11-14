@@ -1,5 +1,6 @@
 import { io } from '../app';
 import { Socket } from "socket.io";
+import { createAttack, decUserResources } from '../services/attacksService';
 
 export const handleSocketConnection = (client: Socket) => {
     console.log(`new socket connection: ${client.id}`);
@@ -7,8 +8,10 @@ export const handleSocketConnection = (client: Socket) => {
         console.log("user disconnected");
     })
 
-    client.on("lanch", () => {
-        console.log("example event");
-        io.emit("client-example event");
+    client.on("createAttack", async (attackData) => {
+        console.log(attackData);
+        decUserResources(attackData.attacker_id, attackData.missile)
+        createAttack(attackData)
+        io.emit("newAttackCreated", attackData);
     })
 };
